@@ -29,8 +29,6 @@ function createWindow(): void {
     return { action: "deny" };
   });
 
-  // HMR for renderer base on electron-vite cli.
-  // Load the remote URL for development or the local html file for production.
   if (is.dev && process.env.ELECTRON_RENDERER_URL) {
     mainWindow.loadURL(process.env.ELECTRON_RENDERER_URL);
   } else {
@@ -38,6 +36,9 @@ function createWindow(): void {
   }
 }
 
+if (process.platform === "darwin") {
+  app.dock.setIcon(path.resolve(__dirname, "icon.png"));
+}
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
